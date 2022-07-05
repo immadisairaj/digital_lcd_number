@@ -1,6 +1,6 @@
 name: digital_lcd_number
-description: A digital LCD display for numbers.
-version: 0.0.1
+description: An automatic sizer digital single-digit number with LCD style widget.
+version: 0.1.0
 # homepage:
 repository: https://github.com/immadisairaj/digital_lcd_number
 

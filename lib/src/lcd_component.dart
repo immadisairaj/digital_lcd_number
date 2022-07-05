@@ -87,10 +87,12 @@ class DigitalLcdNumber extends StatelessWidget {
   final int number;
 
   /// the color of the LCD display. (optional)
+  ///
   /// If not provided, it will default to primary color of the theme.
   final Color? color;
 
   /// disabled color of the LCD display. (optional)
+  ///
   /// If not provided, it will be set to [color] with an alpha value of 10%.
   final Color? disabledColor;
 

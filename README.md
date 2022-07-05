@@ -1,8 +1,12 @@
-A digital LCD display for numbers.
+An automatic sizer digital single-digit number with LCD style widget.
 
 <img width="1004" alt="Screenshot 2022-07-05 at 21 59 40" src="https://user-images.githubusercontent.com/40348358/177374481-a1ad589f-dde3-44f1-828e-8fb2dd23a2ab.png">
 
-<!-- ## Features -->
+## Features
+
+This package (or widget) can be used across any platform as it is platform independent
+
+- Customize the colors of the widget
 
 ## Setup
 
@@ -10,7 +14,7 @@ There is no special setup required, just add the dependency in `pubspec.yaml`, i
 
 Add the dependency in `pubspec.yaml`
 ```yaml
-digital_lcd_number: ^0.0.1 # Note: use latest version
+digital_lcd_number: ^0.1.0 # Note: use latest version
 ```
 
 Import the widget into dart file
@@ -21,6 +25,7 @@ import 'package:digital_lcd_number/digital_lcd_number.dart';
 ## Usage
 
 ```dart
+// default usage
 DigitalLcdNumber(number: 0),
 ```
 
