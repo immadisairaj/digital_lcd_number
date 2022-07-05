@@ -1,5 +1,7 @@
 A digital LCD display for numbers.
 
+<img width="1004" alt="Screenshot 2022-07-05 at 21 59 40" src="https://user-images.githubusercontent.com/40348358/177374481-a1ad589f-dde3-44f1-828e-8fb2dd23a2ab.png">
+
 <!-- ## Features -->
 
 ## Setup
