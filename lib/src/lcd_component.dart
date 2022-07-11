@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 /// Bar which acts as the building blocks for the [DigitalLcdNumber].
@@ -6,6 +8,9 @@ class _BuildingBar extends StatelessWidget {
   /// [height], [width] and [barColor].
   ///
   /// It paints a small shadow with 80% of aplha around the bar.
+  ///
+  /// The spread and blur radius is the minimum of height and width clamped
+  /// between 1 and 15.
   const _BuildingBar({
     required this.height,
     required this.width,
@@ -23,13 +28,14 @@ class _BuildingBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final blurAndSpreadRadius = min(height, width).clamp(1.0, 15.0);
     return Container(
       decoration:
           BoxDecoration(borderRadius: BorderRadius.circular(50), boxShadow: [
         BoxShadow(
           color: barColor.withAlpha(barColor.alpha ~/ 1.25),
-          blurRadius: 10.0,
-          spreadRadius: 10.0,
+          blurRadius: blurAndSpreadRadius,
+          spreadRadius: blurAndSpreadRadius,
           offset: const Offset(
             0.0,
             0.0,
