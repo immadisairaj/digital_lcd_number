@@ -1,3 +1,6 @@
+## 0.1.2
+- Add screenshot to pub.dev
+
 ## 0.1.1
 - Fix number display on lower sizes
 

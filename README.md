@@ -14,7 +14,7 @@ There is no special setup required, just add the dependency in `pubspec.yaml`, i
 
 Add the dependency in `pubspec.yaml`
 ```yaml
-digital_lcd_number: ^0.1.1 # Note: use latest version
+digital_lcd_number: ^0.1.2 # Note: use latest version
 ```
 
 Import the widget into dart file

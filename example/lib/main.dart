@@ -51,8 +51,8 @@ class DigitalLcdDisplayExample extends StatelessWidget {
                 ),
               ),
               // With row Sized Box (height is fixed and width is infinite)
-              Row(
-                children: const [
+              const Row(
+                children: [
                   SizedBox(
                     height: 200,
                     child: Padding(
@@ -72,10 +72,10 @@ class DigitalLcdDisplayExample extends StatelessWidget {
                 ),
               ),
               // With row and column (height and width are infinite)
-              Row(
+              const Row(
                 children: [
                   Column(
-                    children: const [
+                    children: [
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: DigitalLcdNumber(
