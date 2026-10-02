@@ -1,6 +1,8 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
+import 'lcd_color.dart';
 
 /// Bar which acts as the building blocks for the [DigitalLcdNumber].
 class _BuildingBar extends StatelessWidget {
@@ -14,7 +16,7 @@ class _BuildingBar extends StatelessWidget {
   const _BuildingBar({
     required this.height,
     required this.width,
-    this.barColor = Colors.grey,
+    this.barColor = const Color(0xFF9E9E9E),
   }) : assert(height >= 0 && width >= 0);
 
   /// height of the bar
@@ -33,7 +35,7 @@ class _BuildingBar extends StatelessWidget {
       decoration:
           BoxDecoration(borderRadius: BorderRadius.circular(50), boxShadow: [
         BoxShadow(
-          color: barColor.withAlpha(barColor.alpha ~/ 1.25),
+          color: barColor.withValues(alpha: barColor.a / 1.25),
           blurRadius: blurAndSpreadRadius,
           spreadRadius: blurAndSpreadRadius,
           offset: const Offset(
@@ -64,7 +66,8 @@ class DigitalLcdNumber extends StatelessWidget {
   /// * [disabledColor] - the color of the LCD display when it is disabled.
   ///   (optional)
   ///
-  /// If [color] is not provided, it will default to primary color of the theme.
+  /// If [color] is not provided, it will default to the ambient text color
+  /// ([DefaultTextStyle]).
   ///
   /// If [disabledColor] is not provided, it will be set to [color] with
   /// an alpha value of 10%.
@@ -94,7 +97,8 @@ class DigitalLcdNumber extends StatelessWidget {
 
   /// the color of the LCD display. (optional)
   ///
-  /// If not provided, it will default to primary color of the theme.
+  /// If not provided, it will default to the ambient text color
+  /// ([DefaultTextStyle]).
   final Color? color;
 
   /// disabled color of the LCD display. (optional)
@@ -104,9 +108,9 @@ class DigitalLcdNumber extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color color = this.color ?? Theme.of(context).primaryColor;
+    final Color color = this.color ?? defaultLcdColor(context);
     final Color disabledColor =
-        this.disabledColor ?? color.withAlpha(color.alpha ~/ 10);
+        this.disabledColor ?? color.withValues(alpha: color.a / 10);
 
     return Padding(
       padding: const EdgeInsets.all(20.0),

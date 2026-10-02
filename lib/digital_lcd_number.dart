@@ -1,4 +1,5 @@
 /// A package which provides a digital LCD display for numbers.
-library digital_lcd_number;
+library;
 
 export 'src/lcd_component.dart';
+export 'src/lcd_separators.dart';

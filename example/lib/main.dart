@@ -1,28 +1,79 @@
+import 'dart:async';
+
 import 'package:digital_lcd_number/digital_lcd_number.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Digital LCD Number',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorSchemeSeed: Colors.blue,
+        useMaterial3: true,
       ),
       home: const DigitalLcdDisplayExample(),
     );
   }
 }
 
-class DigitalLcdDisplayExample extends StatelessWidget {
-  const DigitalLcdDisplayExample({Key? key}) : super(key: key);
+class DigitalLcdDisplayExample extends StatefulWidget {
+  const DigitalLcdDisplayExample({super.key});
+
+  @override
+  State<DigitalLcdDisplayExample> createState() =>
+      _DigitalLcdDisplayExampleState();
+}
+
+class _DigitalLcdDisplayExampleState extends State<DigitalLcdDisplayExample> {
+  late final Timer _timer;
+  final Stopwatch _stopwatch = Stopwatch()..start();
+  int _centis = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(const Duration(milliseconds: 50), (_) {
+      setState(() => _centis = _stopwatch.elapsedMilliseconds ~/ 10);
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  /// 'MM:SS.cc' as LCD digits with a blinking colon and a decimal point.
+  Widget _clock(Color color) {
+    final minutes = (_centis ~/ 6000) % 100;
+    final seconds = (_centis ~/ 100) % 60;
+    final centis = _centis % 100;
+    Widget digit(int n) => DigitalLcdNumber(number: n, color: color);
+    return SizedBox(
+      height: 120,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          digit(minutes ~/ 10),
+          digit(minutes % 10),
+          DigitalLcdColon(color: color, active: seconds.isEven),
+          digit(seconds ~/ 10),
+          digit(seconds % 10),
+          DigitalLcdDot(color: color),
+          digit(centis ~/ 10),
+          digit(centis % 10),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +89,11 @@ class DigitalLcdDisplayExample extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Center(child: Text('Scroll to view')),
+              ),
+              // Clock: digits + colon + decimal point
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: _clock(Colors.red),
               ),
               // With Sized Box (fixed size)
               const SizedBox(
@@ -122,6 +178,7 @@ class DigitalLcdDisplayExample extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: DigitalLcdNumber(
                     number: 7,
+                    color: Theme.of(context).colorScheme.primary,
                     disabledColor: Colors.yellow.shade200,
                   ),
                 ),
